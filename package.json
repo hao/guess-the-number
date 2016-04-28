@@ -15,6 +15,9 @@
     "browserify": "^6.2.0",
     "envify": "^3.0.0",
     "jest-cli": "^0.4.3",
+    "lodash": "^4.11.1",
+    "react-templates": "^0.4.3",
+    "react-templatify": "^0.3.2",
     "reactify": "^0.15.2",
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1"
@@ -28,7 +31,8 @@
   "browserify": {
     "transform": [
       "reactify",
-      "envify"
+      "envify",
+      "react-templatify"
     ]
   },
   "jest": {
