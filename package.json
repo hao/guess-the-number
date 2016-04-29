@@ -1,8 +1,8 @@
 {
-  "name": "todomvc-flux",
+  "name": "guess-the-number",
   "version": "0.0.3",
-  "description": "Example Flux architecture.",
-  "repository": "https://github.com/facebook/flux",
+  "description": "Guess the Number using React/Flux",
+  "repository": "https://github.com/hao/geuss-the-number",
   "main": "js/app.js",
   "dependencies": {
     "classnames": "^2.1.3",
