@@ -1,0 +1,3 @@
+<div id="prompt">
+  Guess the number between {this.bounds.lower} and {this.bounds.upper}
+</div>
