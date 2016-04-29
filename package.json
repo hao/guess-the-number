@@ -14,7 +14,7 @@
   "devDependencies": {
     "browserify": "^6.2.0",
     "envify": "^3.0.0",
-    "jest-cli": "^0.4.3",
+    "jest-cli": "0.6.1",
     "lodash": "^4.11.1",
     "react-templates": "^0.4.3",
     "react-templatify": "^0.3.2",
