@@ -21,6 +21,9 @@ describe('guessTheNumberStore', function () {
     actionType: guessTheNumberConstants.ACTION_BOUNDS_SET_UPPER,
     value: mockUpperBound
   };
+  var mockActionResetBounds = {
+    actionType: guessTheNumberConstants.ACTION_BOUNDS_RESET
+  }
 
   beforeEach(function () {
     AppDispatcher = require('../../dispatcher/AppDispatcher');
@@ -53,4 +56,16 @@ describe('guessTheNumberStore', function () {
     var bounds = guessTheNumberStore.getBounds();
     expect(bounds.upper).toEqual(mockUpperBound);
   });
+
+  it('should reset the lower bound', function () {
+    callback(mockActionResetBounds);
+    var bounds = guessTheNumberStore.getBounds();
+    expect(bounds.lower).toEqual(guessTheNumberConstants.BOUNDS_LOWER_DEFAULT);
+  })
+
+  it('should reset the upper bound', function () {
+    callback(mockActionResetBounds);
+    var bounds = guessTheNumberStore.getBounds();
+    expect(bounds.upper).toEqual(guessTheNumberConstants.BOUNDS_UPPER_DEFAULT);
+  })
 });

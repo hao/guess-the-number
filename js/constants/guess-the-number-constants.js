@@ -1,6 +1,15 @@
 var keyMirror = require('keymirror');
+var _ = require('lodash');
 
-module.exports = keyMirror({
-  ACTION_BOUNDS_SET_LOWER: null,
-  ACTION_BOUNDS_SET_UPPER: null
-});
+var guessTheNumberConstants = _.extend(
+  keyMirror({
+    ACTION_BOUNDS_SET_LOWER: null,
+    ACTION_BOUNDS_SET_UPPER: null,
+    ACTION_BOUNDS_RESET: null
+  }), {
+    BOUNDS_LOWER_DEFAULT: 1,
+    BOUNDS_UPPER_DEFAULT: 10
+  }
+);
+
+module.exports = guessTheNumberConstants;

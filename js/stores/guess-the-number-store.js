@@ -7,8 +7,8 @@ var BOUNDS_CHANGE_EVENT = 'boundsChange';
 
 var _guesses = [];
 var _bounds = {
-  lower: 1,
-  upper: 10
+  lower: guessTheNumberConstants.BOUNDS_LOWER_DEFAULT,
+  upper: guessTheNumberConstants.BOUNDS_UPPER_DEFAULT
 };
 
 function setLowerBound(value) {
@@ -17,6 +17,11 @@ function setLowerBound(value) {
 
 function setUpperBound(value) {
   _bounds.upper = value;
+}
+
+function resetBounds() {
+  setLowerBound(guessTheNumberConstants.BOUNDS_LOWER_DEFAULT);
+  setUpperBound(guessTheNumberConstants.BOUNDS_UPPER_DEFAULT);
 }
 
 var guessTheNumberStore = assign({}, EventEmitter.prototype, {
@@ -32,6 +37,9 @@ AppDispatcher.register(function (action) {
       break;
     case guessTheNumberConstants.ACTION_BOUNDS_SET_UPPER:
       setUpperBound(parseInt(action.value, 10));
+      break;
+    case guessTheNumberConstants.ACTION_BOUNDS_RESET:
+      resetBounds();
       break;
     default:
 
