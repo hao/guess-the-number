@@ -1,0 +1,3 @@
+<div id="last-guess">
+  Last guess: {this.guess || 'none'}
+</div>
