@@ -8,7 +8,7 @@ describe('guessTheNumberStore', function () {
   var guessTheNumberStore;
   var callback;
 
-  // mock bounds
+  // mock values
   var mockLowerBound = 9;
   var mockUpperBound = 42;
 
@@ -23,7 +23,10 @@ describe('guessTheNumberStore', function () {
   };
   var mockActionResetBounds = {
     actionType: guessTheNumberConstants.ACTION_BOUNDS_RESET
-  }
+  };
+  var mockActionGuessNumber = {
+    actionType: guessTheNumberConstants.ACTION_GUESSES_GUESS
+  };
 
   beforeEach(function () {
     AppDispatcher = require('../../dispatcher/AppDispatcher');
@@ -45,6 +48,12 @@ describe('guessTheNumberStore', function () {
     expect(bounds.upper).toEqual(10);
   });
 
+  it('should initialize the random number', function () {
+    var number = guessTheNumberStore.getNumberToGuess();
+    expect(number).toBeDefined();
+    expect(number).toNotEqual(null);
+  });
+
   it('should set the lower bound', function () {
     callback(mockActionSetLowerBound);
     var bounds = guessTheNumberStore.getBounds();
@@ -61,11 +70,33 @@ describe('guessTheNumberStore', function () {
     callback(mockActionResetBounds);
     var bounds = guessTheNumberStore.getBounds();
     expect(bounds.lower).toEqual(guessTheNumberConstants.BOUNDS_LOWER_DEFAULT);
-  })
+  });
 
   it('should reset the upper bound', function () {
     callback(mockActionResetBounds);
     var bounds = guessTheNumberStore.getBounds();
     expect(bounds.upper).toEqual(guessTheNumberConstants.BOUNDS_UPPER_DEFAULT);
-  })
+  });
+
+  it('should allow guessing the number', function () {
+    var actionGuessNumber = mockActionGuessNumber;
+    var actionSetUpperBound = mockActionSetUpperBound;
+    var firstGuessCorrect;
+    var secondGuessCorrect;
+
+    actionSetUpperBound.value = guessTheNumberConstants.BOUNDS_LOWER_DEFAULT + 1;
+
+    callback(mockActionResetBounds);
+    callback(actionSetUpperBound);
+
+    actionGuessNumber.value = guessTheNumberConstants.BOUNDS_LOWER_DEFAULT;
+    callback(actionGuessNumber);
+    firstGuessCorrect = guessTheNumberStore.isLastGuessCorrect();
+
+    actionGuessNumber.value = guessTheNumberConstants.BOUNDS_LOWER_DEFAULT + 1;
+    callback(actionGuessNumber);
+    secondGuessCorrect = guessTheNumberStore.isLastGuessCorrect();
+
+    expect(firstGuessCorrect || secondGuessCorrect).toBe(true);
+  });
 });
