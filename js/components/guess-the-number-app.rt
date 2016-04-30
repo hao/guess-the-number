@@ -1,0 +1,15 @@
+<rt-require dependency="./guess-input/guess-input.react" as="GuessInput" />
+<rt-require dependency="./last-guess/last-guess.react" as="LastGuess" />
+<rt-require dependency="./prompt/prompt.react" as="Prompt" />
+<rt-require dependency="./status/status.react" as="Status" />
+<div>
+  <Prompt
+    bounds={this.state.bounds} />
+  <LastGuess
+    guess={this.state.guess} />
+  <Status
+    isCorrect={this.state.isCorrect}
+    isHigher={this.state.isHigher}
+    isLower={this.state.isLower} />
+  <GuessInput />
+</div>

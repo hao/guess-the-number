@@ -1,9 +1,6 @@
 var React = require('react');
 
-var GuessInput = require('./guess-input/guess-input.react');
-var LastGuess = require('./last-guess/last-guess.react');
-var Prompt = require('./prompt/prompt.react');
-var Status = require('./status/status.react');
+var guessTheNumberAppRT = require('./guess-the-number-app.rt');
 
 var GuessTheNumberStore = require('../stores/guess-the-number-store');
 
@@ -30,21 +27,7 @@ var GuessTheNumberApp = React.createClass({
   /**
    * @return {object}
    */
-  render: function() {
-    return (
-      <div>
-        <Prompt
-          bounds={this.state.bounds} />
-        <LastGuess
-          guess={this.state.guess} />
-        <Status
-          isCorrect={this.state.isCorrect}
-          isHigher={this.state.isHigher}
-          isLower={this.state.isLower} />
-        <GuessInput />
-      </div>
-    );
-  },
+  render: guessTheNumberAppRT,
 
   _onGuess: function(value) {
     this.setState({
