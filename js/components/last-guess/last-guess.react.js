@@ -1,9 +1,13 @@
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 var lastGuessRT = require('./last-guess.rt');
-var guessTheNumberStore = require('../../stores/guess-the-number-store');
 
 var LastGuess = React.createClass({
-  guess: guessTheNumberStore.getLastGuess(),
+
+  propTypes: {
+    guess: ReactPropTypes.number
+  },
+
   render: lastGuessRT
 });
 
