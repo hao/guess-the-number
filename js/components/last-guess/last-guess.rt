@@ -1,3 +1,6 @@
 <div class="row" id="last-guess">
-  <div class="col-xs-12">Last guess: {this.props.guess || 'none'}</div>
+  <div class="col-xs-12">
+    Last guess:
+    <strong class="text-primary">{this.props.guess || 'none'}</strong>
+  </div>
 </div>

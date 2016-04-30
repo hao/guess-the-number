@@ -1,11 +1,11 @@
 <div id="status">
-  <div rt-if="this.props.isLower">
+  <h2 class="text-danger" rt-if="this.props.isLower">
     Nope. Lower.
-  </div>
-  <div rt-if="this.props.isHigher">
+  </h2>
+  <h2 class="text-danger" rt-if="this.props.isHigher">
     Nope. Higher.
-  </div>
-  <div rt-if="this.props.isCorrect">
+  </h2>
+  <h2 class="text-success" rt-if="this.props.isCorrect">
     You got it!
-  </div>
+  </h2>
 </div>

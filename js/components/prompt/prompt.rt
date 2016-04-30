@@ -1,3 +1,8 @@
 <div id="prompt" class="row">
-  <div class="col-xs-12">Guess the number between {this.props.bounds.lower} and {this.props.bounds.upper}</div>
+  <div class="col-xs-12">
+    Guess the number between
+    <strong class="text-primary">{this.props.bounds.lower}</strong>
+    and
+    <strong class="text-primary">{this.props.bounds.upper}</strong>
+  </div>
 </div>
