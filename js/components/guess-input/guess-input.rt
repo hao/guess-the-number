@@ -1,0 +1,9 @@
+<form id="guess-input">
+  <div>
+    Guess:
+    <input onChange="{this._onChange}" />
+  </div>
+  <div>
+    <button onClick="{this._onClick}">Make guess</button>
+  </div>
+</form>
