@@ -1,0 +1,13 @@
+<form class="config-tab-content" className="{this.props.configTabClasses}" id="guess-settings">
+  <div class="form-group">
+    Lower bound:
+    <input class="form-control" onChange="{this._onLowerChange}" value="{this.props.bounds.lower}" />
+  </div>
+  <div class="form-group">
+    Upper bound:
+    <input class="form-control" onChange="{this._onUpperChange}" value="{this.props.bounds.upper}" />
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" onClick="{this._onClick}">Reset</button>
+  </div>
+</form>

@@ -1,15 +1,40 @@
+<rt-require dependency="./config/config.react" as="Config" />
 <rt-require dependency="./guess-input/guess-input.react" as="GuessInput" />
 <rt-require dependency="./last-guess/last-guess.react" as="LastGuess" />
 <rt-require dependency="./prompt/prompt.react" as="Prompt" />
 <rt-require dependency="./status/status.react" as="Status" />
-<div>
-  <Prompt
-    bounds={this.state.bounds} />
-  <LastGuess
-    guess={this.state.guess} />
-  <Status
-    isCorrect={this.state.isCorrect}
-    isHigher={this.state.isHigher}
-    isLower={this.state.isLower} />
-  <GuessInput />
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="nav nav-pills">
+          <li role="presentation" className="{this.state.playTabClasses}">
+            <a href="#" onClick="{this._onPlay}">Play!</a>
+          </li>
+          <li role="presentation" className="{this.state.configTabClasses}">
+            <a href="#" onClick="{this._onConfig}">Game Config</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row play-tab-content" className="{this.state.playTabClasses}">
+      <div class="col-xs-12">
+        <Prompt
+          bounds={this.state.bounds} />
+        <LastGuess
+          guess={this.state.guess} />
+        <Status
+          isCorrect={this.state.isCorrect}
+          isHigher={this.state.isHigher}
+          isLower={this.state.isLower} />
+        <GuessInput />
+      </div>
+    </div>
+
+    <Config
+      bounds={this.state.bounds}
+      configTabClasses={this.state.configTabClasses} />
+  </div>
 </div>

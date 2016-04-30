@@ -8,12 +8,24 @@ var _guesses = [];
 var _bounds = {};
 
 var GuessTheNumberStore = assign({}, EventEmitter.prototype, {
+  addBoundsChangeListener: function(callback) {
+    this.on(GuessTheNumberConstants.EVENT_BOUNDS_CHANGE, callback);
+  },
+
   addGuessListener: function(callback) {
     this.on(GuessTheNumberConstants.EVENT_GUESSES_GUESS, callback);
   },
 
+  emitBoundsChange: function() {
+    this.emit(GuessTheNumberConstants.EVENT_BOUNDS_CHANGE);
+  },
+
   emitGuess: function(value) {
     this.emit(GuessTheNumberConstants.EVENT_GUESSES_GUESS, value);
+  },
+
+  removeBoundsChangeListener: function(callback) {
+    this.removeListener(GuessTheNumberConstants.EVENT_BOUNDS_CHANGE, callback);
   },
 
   removeGuessListener: function(callback) {
@@ -76,6 +88,8 @@ function makeAGuess(value) {
 
 function setNumberToGuess() {
   _numberToGuess = _getRandomNumber(_bounds.lower, _bounds.upper);
+  _guesses = [];
+  GuessTheNumberStore.emitBoundsChange();
 }
 
 function setLowerBound(value) {

@@ -1,4 +1,5 @@
 var React = require('react');
+var classNames = require('classnames');
 
 var guessTheNumberAppRT = require('./guess-the-number-app.rt');
 
@@ -12,32 +13,68 @@ var GuessTheNumberApp = React.createClass({
       guess: null,
       isCorrect: false,
       isHigher: false,
-      isLower: false
+      isLower: false,
+      configTabClasses: classNames({
+        active: false
+      }),
+      playTabClasses: classNames({
+        active: true
+      })
     };
   },
 
   componentDidMount: function() {
     GuessTheNumberStore.addGuessListener(this._onGuess);
+    GuessTheNumberStore.addBoundsChangeListener(this._onBoundsChange);
   },
 
   componentWillUnmount: function() {
     GuessTheNumberStore.removeGuessListener(this._onGuess);
+    GuessTheNumberStore.removeBoundsChangeListener(this._onBoundsChange);
   },
 
-  /**
-   * @return {object}
-   */
   render: guessTheNumberAppRT,
 
-  _onGuess: function(value) {
-    this.setState({
-      bounds: GuessTheNumberStore.getBounds(),
-      guess: value,
-      isCorrect: GuessTheNumberStore.isLastGuessCorrect(),
-      isHigher: GuessTheNumberStore.isLastGuessHigher(),
-      isLower: GuessTheNumberStore.isLastGuessLower(),
+  _onBoundsChange: function() {
+    var state = this.state;
+    state.bounds = GuessTheNumberStore.getBounds();
+    state.guess = null;
+    state.isCorrect = false;
+    state.isHigher = false;
+    state.isLower = false;
+    this.setState(state);
+  },
+
+  _onConfig: function() {
+    var state = this.state;
+    state.configTabClasses = classNames({
+      active: true
     });
-  }
+    state.playTabClasses = classNames({
+      active: false
+    });
+    this.setState(state);
+  },
+
+  _onGuess: function(value) {
+    var state = this.state;
+    state.guess = value;
+    state.isCorrect = GuessTheNumberStore.isLastGuessCorrect();
+    state.isHigher = GuessTheNumberStore.isLastGuessHigher();
+    state.isLower = GuessTheNumberStore.isLastGuessLower();
+    this.setState(state);
+  },
+
+  _onPlay: function() {
+    var state = this.state;
+    state.configTabClasses = classNames({
+      active: false
+    });
+    state.playTabClasses = classNames({
+      active: true
+    });
+    this.setState(state);
+  },
 
 });
 
