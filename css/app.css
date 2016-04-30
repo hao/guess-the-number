@@ -1,0 +1,15 @@
+.guess-the-number-app-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.play-tab-content,
+.config-tab-content {
+  display: none;
+}
+
+.play-tab-content.active,
+.config-tab-content.active {
+  display: block;
+  margin-top: 20px;
+}
