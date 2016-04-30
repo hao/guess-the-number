@@ -1,15 +1,25 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var guessTheNumberConstants = require('../constants/guess-the-number-constants');
+var GuessTheNumberConstants = require('../constants/guess-the-number-constants');
 var assign = require('object-assign');
-
-var BOUNDS_CHANGE_EVENT = 'boundsChange';
 
 var _numberToGuess;
 var _guesses = [];
 var _bounds = {};
 
-var guessTheNumberStore = assign({}, EventEmitter.prototype, {
+var GuessTheNumberStore = assign({}, EventEmitter.prototype, {
+  addGuessListener: function(callback) {
+    this.on(GuessTheNumberConstants.EVENT_GUESSES_GUESS, callback);
+  },
+
+  emitGuess: function(value) {
+    this.emit(GuessTheNumberConstants.EVENT_GUESSES_GUESS, value);
+  },
+
+  removeGuessListener: function(callback) {
+    this.removeListener(GuessTheNumberConstants.EVENT_GUESSES_GUESS, callback);
+  },
+
   getBounds: function () {
     return _bounds;
   },
@@ -34,6 +44,20 @@ var guessTheNumberStore = assign({}, EventEmitter.prototype, {
       return false;
     }
     return _numberToGuess === _guesses[_guesses.length - 1];
+  },
+
+  isLastGuessHigher: function () {
+    if (_guesses.length < 1) {
+      return false;
+    }
+    return _numberToGuess > _guesses[_guesses.length - 1];
+  },
+
+  isLastGuessLower: function () {
+    if (_guesses.length < 1) {
+      return false;
+    }
+    return _numberToGuess < _guesses[_guesses.length - 1];
   }
 });
 
@@ -44,8 +68,9 @@ function _getRandomNumber(lower, upper) {
 
 function makeAGuess(value) {
   var guess = parseInt(value, 10);
-  if (guessTheNumberStore.getLastGuess() !== guess) {
+  if (GuessTheNumberStore.getLastGuess() !== guess) {
     _guesses.push(guess);
+    GuessTheNumberStore.emitGuess(guess);
   }
 }
 
@@ -66,8 +91,8 @@ function setUpperBound(value) {
 }
 
 function resetBounds() {
-  setLowerBound(guessTheNumberConstants.BOUNDS_LOWER_DEFAULT);
-  setUpperBound(guessTheNumberConstants.BOUNDS_UPPER_DEFAULT);
+  setLowerBound(GuessTheNumberConstants.BOUNDS_LOWER_DEFAULT);
+  setUpperBound(GuessTheNumberConstants.BOUNDS_UPPER_DEFAULT);
   setNumberToGuess();
 }
 
@@ -77,18 +102,18 @@ function activate () {
 
 AppDispatcher.register(function (action) {
   switch (action.actionType) {
-    case guessTheNumberConstants.ACTION_BOUNDS_SET_LOWER:
+    case GuessTheNumberConstants.ACTION_BOUNDS_SET_LOWER:
       setLowerBound(parseInt(action.value, 10));
       setNumberToGuess();
       break;
-    case guessTheNumberConstants.ACTION_BOUNDS_SET_UPPER:
+    case GuessTheNumberConstants.ACTION_BOUNDS_SET_UPPER:
       setUpperBound(parseInt(action.value, 10));
       setNumberToGuess();
       break;
-    case guessTheNumberConstants.ACTION_BOUNDS_RESET:
+    case GuessTheNumberConstants.ACTION_BOUNDS_RESET:
       resetBounds();
       break;
-    case guessTheNumberConstants.ACTION_GUESSES_GUESS:
+    case GuessTheNumberConstants.ACTION_GUESSES_GUESS:
       makeAGuess(action.value);
       break;
     default:
@@ -97,4 +122,4 @@ AppDispatcher.register(function (action) {
 
 activate();
 
-module.exports = guessTheNumberStore;
+module.exports = GuessTheNumberStore;
