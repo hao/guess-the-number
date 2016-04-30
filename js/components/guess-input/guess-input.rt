@@ -1,9 +1,9 @@
 <form id="guess-input">
-  <div>
+  <div class="form-group">
     Guess:
-    <input onChange="{this._onChange}" />
+    <input class="form-control" onChange="{this._onChange}" />
   </div>
-  <div>
-    <button onClick="{this._onClick}">Make guess</button>
+  <div class="form-group">
+    <button class="btn btn-primary" onClick="{this._onClick}">Make guess</button>
   </div>
 </form>
