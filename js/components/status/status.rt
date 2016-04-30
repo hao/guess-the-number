@@ -1,0 +1,11 @@
+<div id="status">
+  <div rt-if="this.props.isLower">
+    Nope. Lower.
+  </div>
+  <div rt-if="this.props.isHigher">
+    Nope. Higher.
+  </div>
+  <div rt-if="this.props.isCorrect">
+    You got it!
+  </div>
+</div>
