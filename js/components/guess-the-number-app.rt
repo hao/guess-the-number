@@ -34,7 +34,8 @@
           isCorrect={this.state.isCorrect}
           isHigher={this.state.isHigher}
           isLower={this.state.isLower} />
-        <GuessInput />
+        <GuessInput
+          isCorrect={this.state.isCorrect} />
       </div>
     </div>
 

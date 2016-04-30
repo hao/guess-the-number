@@ -23,6 +23,12 @@ var GuessTheNumberActions = {
     })
   },
 
+  play: function() {
+    AppDispatcher.dispatch({
+      actionType: GuessTheNumberConstants.ACTION_PLAY
+    })
+  },
+
   resetBounds: function() {
     AppDispatcher.dispatch({
       actionType: GuessTheNumberConstants.ACTION_BOUNDS_RESET

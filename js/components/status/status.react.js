@@ -1,13 +1,12 @@
 var React = require('react');
-var ReactPropTypes = React.PropTypes;
 var statusRT = require('./status.rt');
 
 var Status = React.createClass({
 
   propTypes: {
-    isCorrect: ReactPropTypes.bool,
-    isHigher: ReactPropTypes.bool,
-    isLower: ReactPropTypes.bool
+    isCorrect: React.PropTypes.bool,
+    isHigher: React.PropTypes.bool,
+    isLower: React.PropTypes.bool
   },
 
   render: statusRT

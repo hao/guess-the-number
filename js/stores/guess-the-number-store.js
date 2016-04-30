@@ -130,6 +130,9 @@ AppDispatcher.register(function (action) {
     case GuessTheNumberConstants.ACTION_GUESSES_GUESS:
       makeAGuess(action.value);
       break;
+    case GuessTheNumberConstants.ACTION_PLAY:
+      setNumberToGuess(action.value);
+      break;
     default:
   }
 });

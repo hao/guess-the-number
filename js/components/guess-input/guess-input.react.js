@@ -3,6 +3,10 @@ var guessInputRT = require('./guess-input.rt');
 var GuessTheNumberActions = require('../../actions/guess-the-number-actions');
 
 var GuessInput = React.createClass({
+  propTypes: {
+    isCorrect: React.PropTypes.bool
+  },
+
   _onChange: function (event) {
     this.setState({
       value: event.target.value
@@ -10,7 +14,11 @@ var GuessInput = React.createClass({
   },
 
   _onClick: function (event) {
-    GuessTheNumberActions.guess(this.state.value);
+    if (this.props.isCorrect) {
+      GuessTheNumberActions.play();
+    } else {
+      GuessTheNumberActions.guess(this.state.value);
+    }
     event.preventDefault();
   },
 

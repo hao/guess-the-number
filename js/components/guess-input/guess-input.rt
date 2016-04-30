@@ -4,6 +4,7 @@
     <input class="form-control" onChange="{this._onChange}" />
   </div>
   <div class="form-group">
-    <button class="btn btn-primary" onClick="{this._onClick}">Make guess</button>
+    <button rt-if="!this.props.isCorrect" class="btn btn-primary btn-lg" onClick="{this._onClick}">Make guess</button>
+    <button rt-if="this.props.isCorrect" class="btn btn-success btn-lg" onClick="{this._onClick}">Play again</button>
   </div>
 </form>
