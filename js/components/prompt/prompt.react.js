@@ -1,9 +1,13 @@
 var React = require('react');
 var promptRT = require('./prompt.rt');
-var guessTheNumberStore = require('../../stores/guess-the-number-store');
+var GuessTheNumberStore = require('../../stores/guess-the-number-store');
 
 var Prompt = React.createClass({
-  bounds: guessTheNumberStore.getBounds(),
+
+  propTypes: {
+    bounds: React.PropTypes.object.isRequired
+  },
+
   render: promptRT
 });
 
